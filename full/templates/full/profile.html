@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'full/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'full/css/bootstrap.css' %}">
+    <style>
+        .container{
+            background-color:white;
+            border: 1px solid black;
+        }
+        .errorlist{
+            color:red;
+        }
+        .success{
+            color:green;
+            background-color:black;
+        }
+        body{
+            background-color:brown;
+        }
+        .box{
+            background-color:pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+        <div class="col-sm-6">
+            <h1 class='text-center'>This is profile page.</h1>
+            <hr>
+            <div class="container1 text-center">
+                {% for message in messages %}
+                <span {% if message.tags%} class='{{message.tags}}'{% endif %}>{{message}}</span>
+                {% endfor %}
+            </div>
+            <form action="" method="post"class='text-center' novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}}{{fm}}{{fm.errors}} <br><br>
+                {% endfor %}
+                <input type="submit" value="Submit" class='btn btn-danger'>
+                <a href="{% url 'logout' %}" class = 'btn btn-danger'>Logout</a>
+                <a href="{% url 'pass' %}" class = 'btn btn-danger'>Change Password</a>
+            </form>
+        </div>
+        <div class="box col-sm-6">
+            <div class="container1 text-center">
+                {% for message in messages %}
+                <span {% if message.tags%} class='{{message.tags}}'{% endif %}>{{message}}</span>
+                {% endfor %}
+            </div>
+            <form action="" method="post"class='text-center' novalidate>
+                {% csrf_token %}
+                {% for fm in forms %}
+                {{fm.label_tag}}{{fm}}{{fm.errors}} <br><br>
+                {% endfor %}
+                <input type="submit" value="Submit" class='btn btn-danger'>
+                <a href="{% url 'logout' %}" class = 'btn btn-danger'>logout</a>
+                <a href="{% url 'profile' %}" class = 'btn btn-danger'>Dont want to change</a>
+            </form>
+        </div>
+        </div>        
+    </div>
+</body>
+</html>

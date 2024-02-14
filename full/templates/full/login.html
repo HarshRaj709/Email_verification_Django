@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup FOrm</title>
+    <link rel="stylesheet" href="{% static 'full/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'full/css/bootstrap.css' %}">
+    <style>
+        .container{
+            background-color:brown;
+        }
+        .errorlist{
+            color:white;
+        }
+        .success{
+            color:green;
+            background-color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <h1 class='text-center alert-warning mt-3'>Here You can LOGIN Your ACCOUNT.</h1>
+            <form action="" method="post" class='text-center' novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}}{{fm}}{{fm.errors}} <br><br>
+                {% endfor %}
+                <input type="submit" value="Submit" class='btn btn-danger'>
+                <a href="{% url 'Signup' %}" class="btn btn-danger">Go to signup page.</a>
+            </form>
+            {% for message in messages %}
+                <span {% if message.tags%} class='{{message.tags}}'{% endif %}>{{message}}</span>
+            {% endfor %}
+    </div>
+    <script src="{% static 'full/js/popper.js' %}"></script>
+    <script src="{% static 'full/js/jquery.js' %}"></script>
+    <script src="{% static 'full/js/bootstrap.js' %}"></script>
+</body>
+</html>
